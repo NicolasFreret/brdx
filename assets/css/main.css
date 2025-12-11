@@ -106,7 +106,7 @@ section{
     font-size: 1.6rem!important;
     line-height: 1.6rem!important;
     color: var(--orange);
-    text-transform: uppercase;
+    text-transform: uppercase!important;
     padding: 1rem;
     position: relative;
     background: linear-gradient(
@@ -145,11 +145,33 @@ section{
 
     }
 
+}
+
+.wallpaper{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -3;
+}
 
 
-   
-    
+.h1,
+.h2{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800!important;
+    text-transform: uppercase;
+}
 
+.h1{
+    font-size: 5rem!important;
+    line-height: 5.5rem!important;
+}
+
+.h2{
+    font-size: 3.8rem!important;
+    line-height: 4.2rem!important;
 }
 
 
@@ -214,13 +236,43 @@ section{
 .top-bar{
     background-color: var(--orange);
     height: 60px;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    z-index: 10;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* HEADER */
 header{
+    margin-top: 60px;
     display: flex;
     background-color: var(--beige);
-    position: relative;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    z-index: 10;
+
 
     
 
@@ -230,7 +282,8 @@ header{
         justify-content: center;
 
         .sub-menu{
-            
+            z-index: 5;
+            background-color: var(--white);
             position: absolute;
             left:0;
             top:100%;
@@ -241,7 +294,6 @@ header{
         &:hover .sub-menu{
             display: grid;
             --grid-gap:0;
-            grid-template-rows: 50vh 50vh;
         }
 
         .card-menu{
@@ -402,7 +454,36 @@ header{
 
 
 
+/* HERO */
 
+.hero{
+    height: 100vh;
+
+    .btn{
+        margin-top: 200px;
+        color: var(--bordeaux);
+        background: var(--green);
+
+        &::after{
+            background-color: var(--bordeaux);
+        }
+
+        &:hover{
+            color: var(--white);
+
+            &::after{
+                background-color: var(--white);
+            }
+        }
+    }
+
+}
+
+
+
+.top-actus{
+
+}
 
 
 
@@ -500,7 +581,6 @@ header{
     }
 
     header{
-        position: relative;
         justify-content: space-between;
 
         & > *{
@@ -561,6 +641,11 @@ header{
         width: 700px;
     }
 
+    .h1{
+        font-size: 4rem!important;
+        line-height: 4.5rem!important;
+    }
+
     .col-sm-1{
         grid-column: span 1;
     }
@@ -616,6 +701,11 @@ header{
         width: 500px;
     }
 
+    .h1{
+        font-size: 3rem!important;
+        line-height: 3.5rem!important;
+    }
+
     .col-xs-1{
         grid-column: span 1;
     }
@@ -669,6 +759,10 @@ header{
 }
 
 @media screen and (max-width:550px){
+    .h1{
+        font-size: 2rem!important;
+        line-height: 2.5rem!important;
+    }
 
      header{
         .logo{
