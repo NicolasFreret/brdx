@@ -9,6 +9,7 @@
     --grid-gap:2rem;
 
 
+    --drak-green:#00272B;
     --orange:#F16138;
     --white:#fff;
     --black:#000;
@@ -35,6 +36,10 @@ body{
     font-weight: 400;
 }
 
+main{
+    overflow: hidden;
+}
+
 a{
     text-decoration: none;
 }
@@ -52,7 +57,14 @@ section{
 .container{
     width: 1300px;
     margin-inline: auto;
+
+    &.narrow{
+        width: 1000px;
+    }
 }
+
+
+
 
 
 .icon-magnifier{
@@ -92,6 +104,16 @@ section{
     background-color: var(--white);
 }
 
+.icon-arrow{
+    -webkit-mask: url('data:image/svg+xml,<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>');
+    mask-repeat: no-repeat;
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+    position: relative;
+    background-color: var(--orange);
+}
+
 
 
 
@@ -123,6 +145,63 @@ section{
     transition: background-position .5s ease, color .5s ease;
     will-change: color, background-position;
 
+    &.white{
+        background: var(--white);
+        color: var(--black);
+
+         &::after{
+          background-color: var(--black);
+        }
+
+        &:hover{
+            color: var(--black);
+
+            &::after{
+            background-color: var(--black);
+            }
+        }
+    }
+
+    &.orange-black{
+
+            color:var(--white);
+             background: linear-gradient(
+                to left,
+                var(--orange) 0%,
+                var(--orange) 50%,
+                var(--black) 50%,
+                var(--black) 100%
+                );
+
+                background-size: 200% 100%;
+                background-position: right;
+
+                &::after{
+                    background-color: var(--white);
+                }
+    }
+
+    &.yellow-black{
+
+            color:var(--blue);
+             background: linear-gradient(
+                to left,
+                var(--jaune) 0%,
+                var(--jaune) 50%,
+                var(--black) 50%,
+                var(--black) 100%
+                );
+
+                background-size: 200% 100%;
+                background-position: right;
+
+                &::after{
+                    background-color: var(--blue);
+                }
+    }
+
+
+
     &::after{
         content: '';
         -webkit-mask: url('data:image/svg+xml,<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>');
@@ -134,6 +213,7 @@ section{
         will-change: transform, color;
         transition: transform .5s ease, color .5s ease;
     }
+    
     
 
     &:hover{
@@ -271,6 +351,7 @@ section{
 
 
 
+
 /* HEADER */
 header{
     margin-top: 60px;
@@ -282,7 +363,13 @@ header{
     width: 100%;
     z-index: 10;
 
+    ._1{
+        grid-area: 'one';
+    }
 
+    ._2{
+        grid-area: 'two';
+    }
     
 
     .main-nav{
@@ -467,11 +554,16 @@ header{
 
 .hero{
     height: 100vh;
+    padding-top:200px;
 
     .btn{
         margin-top: 200px;
         color: var(--bordeaux);
         background: var(--green);
+        display: inline;
+        box-decoration-break: clone;
+        padding:.3rem 1rem;
+        line-height: 1.3!important;
 
         &::after{
             background-color: var(--bordeaux);
@@ -569,24 +661,6 @@ header{
         font-size: 1.4rem!important;
         line-height: 1.4rem!important;
         margin-top: 2rem;
-        background: linear-gradient(
-        to left,
-        var(--jaune) 0%,
-        var(--jaune) 50%,
-        var(--black) 50%,
-        var(--black) 100%
-        );
-        background-size: 200% 100%;
-        background-position: right;
-        color: var(--blue);
-
-        &::after{
-            background-color: var(--blue);
-        }
-
-        &:hover{
-            background-position: left;
-        }
 
     }
 }
@@ -601,6 +675,8 @@ header{
         h2{
             color: var(--bordeaux);
         }
+
+        
     }
 
     article{
@@ -652,6 +728,178 @@ header{
 }
 
 
+.events-type{
+    background-color: var(--beige);
+    --grid-gap:1rem;
+    article{
+        border: 0.25px var(--grey) solid;
+        background-color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        position: relative;
+
+        a{
+            color: var(--black);
+
+            &::after{
+                content: '';
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        h2{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            max-width: 400px;
+        }
+
+        figure{
+            height: 80px;
+            width: 110px;
+        }
+
+        .img_title{
+            display: flex;
+            align-items: center;
+            gap:2rem;
+        }
+
+        .icon-arrow{
+            transform: translateX(-20px);
+            transition: transform .5s ease;
+            will-change: transform;
+            flex-basis: 30px;
+        }
+
+        &:hover{
+            .icon-arrow{
+                transform: translateX(0px);
+            }
+        }
+    }
+
+}
+
+.eco-partners{
+    background-color: var(--green);
+    height: 450px;
+   
+
+    h2{
+        color: var(--drak-green);
+    }
+
+    p{
+        margin-bottom: 2rem;
+        color: var(--drak-green);
+    }
+
+    .row,
+    .container{
+        height: 100%;
+    }
+
+    .content{
+        grid-column: 6/13;
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+    }
+
+    .wallpaper{
+        z-index: 1;
+        width: 40%;
+    }
+
+}
+
+.gastronomie{
+    padding: 0;
+}
+
+.bloc-img-rotate{
+
+    margin-block: 5rem;
+    height: 500px;
+    position: relative;
+    text-align: right;
+
+    .container{
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+    }
+
+    .title_cta{
+        position: relative;
+        bottom:20px;
+
+        h2{
+            margin-bottom: 2rem;
+
+            span{
+                padding: .3rem 1rem;
+                color: var(--white);
+                line-height: 5rem!important;
+                background-color: pink;
+                box-decoration-break: clone;
+            }
+
+        }
+    }
+
+    .row{
+        --grid-gap:1rem;
+        text-align: center;
+        position: relative;
+        top:20px;
+    }
+
+    article{
+        background-color: var(--white);
+        padding: 1rem;
+        border: solid .25px var(--grey);
+        
+        figure{
+            height: 180px;
+            img{
+                object-fit: cover;
+            }
+            
+        }
+
+        h3{
+            height: 50px;
+            align-content: center;
+            text-align: center;
+        }
+
+    }
+
+    
+    figure.wallpaper{
+        transform: scale(1.2);
+        width: 105vw;
+        left:-5%;
+        top:0;
+        bottom: 0;
+        margin-block: auto;
+        height: 95%;
+        transform: rotate(2deg);
+
+        
+    }
+}
 
 
 
@@ -827,6 +1075,36 @@ header{
 
         }
     }
+
+    .eco-partners{
+        text-align: center;
+        height: fit-content;
+        .wallpaper{
+            position: relative;
+            height: 300px;
+            width: 100%;
+
+            img{
+                object-fit: cover;
+            }
+        }
+
+        .btn{
+            margin-inline: auto;
+        }
+
+        .content{
+            grid-column: span 12;
+        }
+    }
+
+    .events-type{
+        article{
+            h2{
+                max-width: 200px;
+            }
+        }
+    }
     
 
     .h1{
@@ -890,8 +1168,13 @@ header{
     }
 
     .h1{
-        font-size: 3rem!important;
-        line-height: 3.5rem!important;
+        font-size: 3.5rem!important;
+        line-height: 4rem!important;
+    }
+
+    .h2{
+        font-size: 2.5rem!important;
+        line-height: 2.5rem!important;
     }
 
     .col-xs-1{
@@ -977,7 +1260,7 @@ header{
     }
 
     .row{
-        gap:0 20px;
+        gap:var(--grid-gap) 0;
     }
 
   [class*="col-"]{
