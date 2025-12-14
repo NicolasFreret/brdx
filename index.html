@@ -560,7 +560,7 @@
             </div>
         </section>
         <section class="gastronomie">
-            <div class="bloc-img-rotate reverse">
+            <div class="bloc-img-rotate">
                 <figure class="wallpaper">
                     <img loading="lazy" aria-hidden="true" src="assets/img/Cromagnon©Cromagnon.jpg.webp" alt="">
                 </figure>
@@ -571,11 +571,73 @@
                                 Gastronomie & <br> Art de vivre
                             </span>
                         </h2>
-                        <a href="#" class="btn">
+                        <a href="#" class="btn red-black">
                             Voir tout
                         </a>
                     </div>
-                    <div class="row">
+                </div>
+                <div>
+                    <div class="slider-wrapper">
+                        <div class="arrows">
+                            <div class="arrow left">
+                                <
+                            </div>
+                            <div class="arrow right">
+                                >
+                            </div>
+                        </div>
+                        <div class="slides container narrow">
+                             <article class="slide">
+                                <figure>
+                                    <img src="assets/img/Place Gambetta et la porte Dijeaux©Nicolas Duffaure_0.jpg.webp" alt="">
+                                </figure>
+                                <h3 class="h3">
+                                    coucou les gens 1
+                                </h3>
+                            </article>
+                            <article class="slide">
+                                <figure>
+                                    <img src="assets/img/Place Gambetta et la porte Dijeaux©Nicolas Duffaure_0.jpg.webp" alt="">
+                                </figure>
+                                <h3 class="h3">
+                                    coucou les gens 2
+                                </h3>
+                            </article>
+                            <article class="slide">
+                                <figure>
+                                    <img src="assets/img/Place Gambetta et la porte Dijeaux©Nicolas Duffaure_0.jpg.webp" alt="">
+                                </figure>
+                                <h3 class="h3">
+                                    coucou les gens 3
+                                </h3>
+                            </article>
+                            <article class="slide">
+                                <figure>
+                                    <img src="assets/img/Place Gambetta et la porte Dijeaux©Nicolas Duffaure_0.jpg.webp" alt="">
+                                </figure>
+                                <h3 class="h3">
+                                    coucou les gens 4
+                                </h3>
+                            </article>
+                            <article class="slide">
+                                <figure>
+                                    <img src="assets/img/Place Gambetta et la porte Dijeaux©Nicolas Duffaure_0.jpg.webp" alt="">
+                                </figure>
+                                <h3 class="h3">
+                                    coucou les gens 5
+                                </h3>
+                            </article>
+                            <article class="slide">
+                                <figure>
+                                    <img src="assets/img/Place Gambetta et la porte Dijeaux©Nicolas Duffaure_0.jpg.webp" alt="">
+                                </figure>
+                                <h3 class="h3">
+                                    coucou les gens 6
+                                </h3>
+                            </article>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
                         <div class="col-3">
                             <article>
                                 <figure>
@@ -616,14 +678,96 @@
                                 </h3>
                             </article>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
     </main>
     <footer>
 
     </footer>
+
+    <script>
+        const sliderWrapper = document.querySelector('.slider-wrapper'),
+        arrowsWrapper = sliderWrapper.querySelector('.arrows'),
+        slider = sliderWrapper.querySelector('.slides'),
+        slides = slider.querySelectorAll('.slide')
+        
+
+        let startX,
+        scrollLeft,
+        index = 0,
+        s = getSlideWidth()
+
+        function setArrows(){
+            arrowsWrapper.addEventListener('click', e =>{
+                if(e.target.matches('.arrow')){
+                    e.target.classList.contains('left') ? index++ : index--
+                    shiftSlide(index)
+                }
+            })
+        }
+
+        function handleScreeResize(){
+            window.addEventListener('resize',()=>{
+                s = getSlideWidth()
+                console.log(readCssVariable('slide-gap', slider))
+                shiftSlide()
+
+            })
+        }
+
+        function readCssVariable(_varName, _elem = document.body){
+            return getComputedStyle(_elem).getPropertyValue(`--${_varName}`)
+        }
+
+        function sliderGap(){
+            return parseInt(readCssVariable('slide-gap', slider))
+        }
+
+        function getSlideWidth(){
+            return slides[0].getBoundingClientRect().width + sliderGap()
+        }
+
+        function shiftSlide(_index = null){
+            index = _index !== null ? _index : Math.round( slider.scrollLeft / s )
+            if(index < 0) index = (slides.length - readCssVariable('nb-slide', slides[0]))
+            if(index > slides.length - readCssVariable('nb-slide', slides[0])) index = 0
+            slider.scrollLeft = index * s
+        }
+
+
+        function startGrab(e){
+            e.preventDefault()
+            slider.classList.add('active')
+            startX = e.pageX
+            scrollLeft = slider.scrollLeft
+            slider.addEventListener('mousemove', dragging)
+            slider.addEventListener('mouseup', stopDrag)
+            slider.addEventListener('mouseleave', stopDrag)
+
+
+        }
+
+        function dragging(e){
+            const deviation = e.pageX - startX
+            slider.scrollLeft = scrollLeft - deviation
+        }
+
+        function stopDrag(){
+            slider.classList.remove('active')
+            shiftSlide()
+            slider.removeEventListener('mousemove', dragging)
+            slider.removeEventListener('mouseup', stopDrag)
+            slider.removeEventListener('mouseleave', stopDrag)
+        }
+
+
+        setArrows()
+        handleScreeResize()
+        slider.addEventListener('mousedown', startGrab)
+
+    </script>
 </body>
 </html>
